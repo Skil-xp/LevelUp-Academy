@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimento - LevelUp Academy</title>
+  <link href="styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #001f3f, #0074D9, #001f3f);
+      min-height: 100vh;
+      color: #fff;
+      padding-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cabeçalho fixo */
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 30px;
+      color: #FF4500;
+    }
+
+    header nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 12px 20px;
+      background-color: #FF4500;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      font-size: 16px;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    header nav a:hover {
+      background-color: #ff6347;
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+    }
+
+    /* Seção do chat */
+    .chat-container {
+      max-width: 600px;
+      width: 100%;
+      margin: 100px auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .chatbox {
+      background: #333;
+      border-radius: 10px;
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .chat-message {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+
+    .chatbot-message {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .user-message {
+      background-color: #444;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .message-input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .send-button {
+      background-color: #FF4500;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .send-button:hover {
+      background-color: #ff6347;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #fff;
+      font-size: 16px;
+      padding: 20px;
+      background-color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .quick-button {
+      background-color: #0074D9;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .quick-button:hover {
+      background-color: #0063b1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 LevelUp Academy</h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="curso.html">📚 Curso</a>
+      <a href="#" onclick="logout()">🚪 Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Seção do Chat -->
+    <section class="chat-container">
+      <div class="chatbox" id="chatbox">
+        <!-- Mensagens do Chatbot -->
+        <div class="chat-message chatbot-message">Olá! Como posso ajudar você hoje?</div>
+      </div>
+
+      <div class="input-container">
+        <input type="text" id="user-input" class="message-input" placeholder="Digite sua mensagem..." />
+        <button class="send-button" onclick="sendMessage()">Enviar</button>
+      </div>
+
+      <!-- Botões de Atalho para Perguntas -->
+      <div class="button-container">
+        <button class="quick-button" onclick="sendQuickMessage('quais cursos você tem?')">Quais cursos você tem?</button>
+        <button class="quick-button" onclick="sendQuickMessage('quais são os planos?')">Quais são os planos?</button>
+        <button class="quick-button" onclick="sendQuickMessage('como eu faço meu cadastro?')">Como eu faço meu cadastro?</button>
+        <button class="quick-button" onclick="sendQuickMessage('ajuda')">Ajuda</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LevelUp Academy - Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Função para enviar a mensagem do usuário
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value;
+      if (userInput.trim() === "") return;
+
+      // Adiciona a mensagem do usuário ao chat
+      const chatbox = document.getElementById('chatbox');
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('chat-message', 'user-message');
+      userMessage.textContent = userInput;
+      chatbox.appendChild(userMessage);
+
+      // Limpa o campo de entrada
+      document.getElementById('user-input').value = "";
+
+      // Adiciona uma resposta padrão do chatbot
+      setTimeout(() => {
+        const chatbotMessage = document.createElement('div');
+        chatbotMessage.classList.add('chat-message', 'chatbot-message');
+        chatbotMessage.textContent = getChatbotResponse(userInput);
+        chatbox.appendChild(chatbotMessage);
+
+        // Rola até a última mensagem
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }, 1000);
+    }
+
+    // Função para enviar uma mensagem rápida ao clicar nos botões
+    function sendQuickMessage(message) {
+      // Adiciona a mensagem do usuário ao chat
+      const chatbox = document.getElementById('chatbox');
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('chat-message', 'user-message');
+      userMessage.textContent = message;
+      chatbox.appendChild(userMessage);
+
+      // Adiciona a resposta do chatbot
+      setTimeout(() => {
+        const chatbotMessage = document.createElement('div');
+        chatbotMessage.classList.add('chat-message', 'chatbot-message');
+        chatbotMessage.textContent = getChatbotResponse(message);
+        chatbox.appendChild(chatbotMessage);
+
+        // Rola até a última mensagem
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }, 1000);
+    }
+
+    // Função para obter respostas do chatbot
+    function getChatbotResponse(userInput) {
+      const responses = {
+        "olá": "Olá! Como posso ajudar você?",
+        "quais cursos você tem?": "Temos cursos de programação, design e marketing digital. Escolha um para explorar!",
+        "como eu faço meu cadastro?": "Você pode se cadastrar clicando em 'Cadastre-se' no menu!",
+        "quais são os planos?": "Oferecemos planos mensal e anual. Confira na página de planos!",
+        "ajuda": "Claro! Como posso ajudar mais?"
+      };
+
+      // Responde de acordo com a mensagem do usuário
+      return responses[userInput.toLowerCase()] || "Desculpe, não entendi. Tente outra vez!";
+    }
+
+    // Logout (Simulação)
+    function logout() {
+      alert('Você foi desconectado!');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
