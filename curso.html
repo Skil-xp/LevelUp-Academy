@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cursos - LevelUp Academy</title>
-  <link href="styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    /* Reset básico */
     * {
       margin: 0;
       padding: 0;
@@ -15,305 +13,168 @@
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #111, #080e2a, #001f3f);
+      font-family: 'Press Start 2P', cursive;
+      background: #0a0f25;
       color: #fff;
       padding-top: 80px;
-      overflow-x: hidden;
+      text-align: center;
     }
 
-    /* Cabeçalho fixo */
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-      z-index: 100;
+      background: linear-gradient(-45deg, #0a0f25, #1a2a5e, #39a0ed, #1a2a5e);
+      background-size: 300% 300%;
+      animation: gradientAnimation 5s infinite alternate;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+      z-index: 100;
     }
 
-    header h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 30px;
-      color: #ff4500;
+    @keyframes gradientAnimation {
+      0% { background-position: left; }
+      100% { background-position: right; }
     }
 
-    header nav a {
+    nav a {
       text-decoration: none;
-      font-family: 'Press Start 2P', cursive;
       color: #fff;
-      padding: 10px 15px;
-      margin-left: 15px;
-      background: linear-gradient(135deg, #ff4500, #ff6347);
+      padding: 10px 20px;
+      background: #39a0ed;
       border-radius: 10px;
-      position: relative;
-      display: inline-block;
-      transition: transform 0.3s ease, background 0.3s ease;
+      transition: transform 0.3s, background 0.3s;
+      border: 2px solid #fff;
     }
 
-    header nav a::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background-color: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s ease, height 0.3s ease;
+    nav a:hover {
+      transform: scale(1.1);
+      background: #300ada;
+      box-shadow: 0px 0px 15px rgba(15, 133, 202, 0.8);
     }
 
-    header nav a:hover {
-      transform: translateY(-5px) scale(1.05);
-      background: linear-gradient(135deg, #ff6347, #ff4500);
-    }
-
-    header nav a:hover::after {
-      width: 150%;
-      height: 150%;
-    }
-
-    /* Seção Hero */
     .hero {
-      text-align: center;
       padding: 100px 20px;
-      background: radial-gradient(circle, rgba(0, 0, 0, 0.9) 20%, transparent 60%);
-      z-index: 1;
+      background: radial-gradient(circle, rgba(10, 15, 37, 0.8) 20%, transparent 60%);
     }
 
     .hero h2 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 48px;
-      color: #FF4500;
-      margin-bottom: 20px;
+      font-size: 36px;
+      color: #0a9de0;
+      text-shadow: 2px 2px 10px rgba(9, 140, 247, 0.7);
     }
 
-    .hero p {
-      font-size: 22px;
-      color: #ddd;
-      margin-bottom: 30px;
-    }
-
-    /* Seção Cursos */
     .courses-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
       padding: 40px 20px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     .course-card {
-      background: rgba(30, 30, 30, 0.8);
+      background: rgba(26, 42, 94, 0.9);
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      padding: 25px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 2px solid #f0f0f0;
     }
 
     .course-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 20px rgba(57, 160, 237, 0.9);
+      border-color: #16b6df;
     }
 
     .course-card h3 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 28px;
-      color: #FF4500;
-      margin-bottom: 15px;
-    }
-
-    .course-card p {
-      font-size: 18px;
-      color: #bbb;
-      margin-bottom: 20px;
-    }
-
-    .course-card .price {
-      font-size: 24px;
-      color: #ffcc00;
-      margin-bottom: 25px;
-      font-weight: bold;
+      color: #39a0ed;
     }
 
     .course-card button {
-      padding: 12px 25px;
-      background-color: #ff4500;
-      color: #fff;
+      background: #119edf;
       border: none;
+      padding: 10px 20px;
+      color: white;
       border-radius: 10px;
       cursor: pointer;
-      font-family: 'Press Start 2P', cursive;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: transform 0.3s;
     }
 
     .course-card button:hover {
-      background-color: #ff6347;
-      transform: scale(1.05);
+      background: #203f94;
+      transform: scale(1.1);
     }
 
-    /* Características dos Cursos */
-    .course-features {
-      padding: 40px 20px;
-      background-color: #1a1a1a;
-    }
-
-    .course-features h2 {
-      text-align: center;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 40px;
-      color: #ff4500;
-      margin-bottom: 30px;
-    }
-
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    .feature img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-    }
-
-    .feature h3 {
-      font-size: 22px;
-      color: #ff4500;
-      font-family: 'Press Start 2P', cursive;
-    }
-
-    .feature p {
-      color: #ccc;
-      font-size: 18px;
-    }
-
-    /* Rodapé */
     footer {
-      text-align: center;
-      background-color: #080e2a;
-      color: #fff;
       padding: 20px;
-      font-size: 16px;
-    }
-
-    footer a {
-      color: #ff4500;
-      text-decoration: none;
-      font-weight: bold;
+      background: #0a0f25;
+      color: white;
+      border-top: 2px solid #39a0ed;
     }
   </style>
 </head>
 <body>
-
-  <!-- Cabeçalho -->
   <header>
-    <h1>🎮 LevelUp Academy</h1>
+    <h1> LevelUp Academy</h1>
     <nav>
-      <a href="index.html">🏠 Home</a>
-      <a href="Atendimento.html">🤖 Atendimento</a>
-      <a href="#" onclick="logout()">🚪 Logout</a>
+      <a href="index.html"> Home</a>
+      <a href="planos.html"> Planos</a>
+      <a href=" Atendimento.html">Atendimento</a>
+      <a class="navigation" href="login.html" onclick="logout()">Logout</a>
     </nav>
   </header>
 
-  <!-- Seção Hero -->
   <section class="hero">
     <h2>Explore Nossos Cursos</h2>
-    <p>Aprenda novas habilidades enquanto joga! Escolha entre diversos cursos gamificados.</p>
+    <p>Aprenda enquanto joga!</p>
   </section>
 
-  <!-- Seção de Cursos -->
   <section class="courses-container">
     <div class="course-card">
-      <h3>Matemática Básica</h3>
-      <p>Aprenda os conceitos fundamentais da matemática, como operações, frações e porcentagens.</p>
-      <p class="price">R$ 29,99</p>
+      <h3>Português Fundamental</h3>
+      <p>Aprimore sua leitura e escrita de forma divertida.</p>
       <button>Inscrever</button>
     </div>
 
     <div class="course-card">
-      <h3>História do Brasil</h3>
-      <p>Explore os principais eventos históricos do Brasil e como eles moldaram a sociedade atual.</p>
-      <p class="price">R$ 39,99</p>
+      <h3>Matemática Divertida</h3>
+      <p>Aprenda matemática com desafios e jogos interativos.</p>
+      <button onclick="window.location.href='https://view.genially.com/67e1ef1b4ad4b11f40842fb2/interactive-content-pixelmath';">Inscrever</button>
+    </div>
+
+    <div class="course-card">
+      <h3>Ciências Exploratórias</h3>
+      <p>Descubra o mundo da ciência com experimentos e aventuras.</p>
       <button>Inscrever</button>
     </div>
 
     <div class="course-card">
-      <h3>Ciências Naturais</h3>
-      <p>Entenda os fundamentos da biologia, física e química de maneira simples e divertida.</p>
-      <p class="price">R$ 49,99</p>
+      <h3>História e Geografia</h3>
+      <p>Conheça o Brasil e o mundo através de missões e mapas.</p>
       <button>Inscrever</button>
     </div>
 
     <div class="course-card">
-      <h3>Redação e Gramática</h3>
-      <p>Aprenda a escrever de forma clara e objetiva, além de dominar a gramática da língua portuguesa.</p>
-      <p class="price">R$ 29,99</p>
+      <h3>Artes Criativas e Expressão</h3>
+      <p>Aprenda pintura, escultura e teatro de maneira divertida.</p>
       <button>Inscrever</button>
     </div>
 
     <div class="course-card">
-      <h3>Geografia do Mundo</h3>
-      <p>Explore os continentes, países e características geográficas do mundo.</p>
-      <p class="price">R$ 34,99</p>
-      <button>Inscrever</button>
-    </div>
-
-    <div class="course-card">
-      <h3>Inglês para Iniciantes</h3>
-      <p>Introdução ao idioma inglês, com foco em vocabulário e frases úteis para o cotidiano.</p>
-      <p class="price">R$ 44,99</p>
+      <h3>Inglês Interativo</h3>
+      <p>Melhore seu inglês com atividades lúdicas e desafios.</p>
       <button>Inscrever</button>
     </div>
   </section>
 
-  <!-- Características dos Cursos -->
-  <section class="course-features">
-    <h2>Por que Escolher a LevelUp Academy?</h2>
-    <div class="feature">
-      <img src="medal.png" alt="Medalha">
-      <div>
-        <h3>Conquistas e Recompensas</h3>
-        <p>Ganhe medalhas e recompensas enquanto avança nos cursos.</p>
-      </div>
-    </div>
-
-    <div class="feature">
-      <img src="gamepad.png" alt="Controle">
-      <div>
-        <h3>Gamificação Completa</h3>
-        <p>Transforme o aprendizado em um jogo, com missões e desafios.</p>
-      </div>
-    </div>
-
-    <div class="feature">
-      <img src="video.png" alt="Vídeo">
-      <div>
-        <h3>Aulas em Vídeo</h3>
-        <p>Aulas interativas com vídeos, guias e quizzes para reforçar seu aprendizado.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Rodapé -->
   <footer>
-    <p>&copy; 2025 LevelUp Academy - Todos os direitos reservados.</p>
-    <p><a href="termos.html">Termos de Serviço</a> | <a href="privacidade.html">Política de Privacidade</a></p>
+    <p>&copy; 2025 LevelUp Academy - Aprenda jogando!</p>
   </footer>
-
 </body>
 </html>
