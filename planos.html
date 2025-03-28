@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelUp Academy - Aprenda Jogando</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: linear-gradient(135deg, #0a0f25, #1a2a5e, #39a0ed);
+      color: #fff;
+      padding-top: 80px;
+      text-align: center;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background: rgba(10, 15, 37, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0px 0px 10px rgba(57, 160, 237, 0.7);
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px 20px;
+      background: #39a0ed;
+      border-radius: 10px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    nav a:hover {
+      transform: scale(1.1);
+      background: #1a2a5e;
+    }
+
+    .hero {
+      padding: 100px 20px;
+      background: radial-gradient(circle, rgba(10, 15, 37, 0.8) 20%, transparent 60%);
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      color: #39a0ed;
+      text-shadow: 2px 2px 10px rgba(57, 160, 237, 0.7);
+    }
+
+    .cta {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cta a {
+      text-decoration: none;
+      padding: 15px 30px;
+      background: #39a0ed;
+      border-radius: 10px;
+      color: #fff;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .cta a:hover {
+      background: #1a2a5e;
+      transform: scale(1.1);
+    }
+
+    .plans-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .plan-card {
+      background: rgba(26, 42, 94, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+    }
+
+    .plan-card h3 {
+      color: #39a0ed;
+    }
+
+    .plan-card button {
+      background: #39a0ed;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .plan-card button:hover {
+      background: #1a2a5e;
+      transform: scale(1.1);
+    }
+
+    footer {
+      padding: 20px;
+      background: #0a0f25;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.jpg" alt="LevelUp Academy Logo" class="logo">
+    </div>
+    <nav>
+      <a href="index.html"> Home</a>
+      <a href="curso.html">Cursos</a>
+      <a href=" Atendimento.html">Atendimento</a>
+      <a class="navigation" href="login.html" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Bem-vindo à LevelUp Academy!</h2>
+    <p>Transforme o aprendizado em uma jornada épica!</p>
+    <div class="cta">
+      <a href="#">Explorar Cursos</a>
+    </div>
+  </section>
+
+  <section class="plans-container">
+    <div class="plan-card">
+      <h3>Plano Básico</h3>
+      <p>Acesso aos cursos iniciais.</p>
+      <p>R$49,99/mês</p>
+      <button>Assinar</button>
+    </div>
+
+    <div class="plan-card">
+      <h3>Plano Master</h3>
+      <p>Acesso ilimitado e coaching.</p>
+      <p>R$149,99/mês</p>
+      <button>Assinar</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 LevelUp Academy - Aprenda jogando!</p>
+  </footer>
+</body>
+</html>
