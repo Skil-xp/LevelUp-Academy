@@ -6,20 +6,24 @@
   <title>Planos - LevelUp Academy</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    /* Reset e configurações básicas */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Press Start 2P', cursive;
       background: #0a0f25;
       color: #fff;
       text-align: center;
-      padding-top: 160px;
+      padding-top: 240px; /* Espaço para header e hero */
+      overflow-x: hidden;
     }
-
+    /* Header e Navegação */
     header {
       position: fixed;
       top: 0;
@@ -32,18 +36,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+      box-shadow: 0 4px 10px rgba(57, 160, 237, 0.7);
       z-index: 1000;
     }
-
-    .logo-container img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0px 0px 10px rgba(57, 160, 237, 0.7);
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
-
+    .logo-container {
+      margin-bottom: 10px;
+    }
+    .logo-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 10px rgba(57, 160, 237, 0.7);
+    }
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -51,29 +60,40 @@
       gap: 10px;
       margin-top: 10px;
     }
-
     nav a {
       text-decoration: none;
       color: #fff;
-      padding: 8px 15px;
+      padding: 12px 24px;
       background: #39a0ed;
       border-radius: 10px;
-      transition: transform 0.3s, background 0.3s;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
       border: 2px solid #fff;
-      font-size: 12px;
+      font-size: 16px;
+      cursor: pointer;
     }
-
     nav a:hover {
       transform: scale(1.1);
-      background: #300ada;
-      box-shadow: 0px 0px 15px rgba(15, 133, 202, 0.8);
+      background: #203f94;
+      box-shadow: 0 0 15px rgba(15, 133, 202, 0.8);
     }
-
+    /* Seção Hero com estética pixel art */
     .hero {
-      margin-top: 20px;
+      margin: 20px auto 40px;
       padding: 20px;
+      max-width: 800px;
     }
-
+    .hero h2 {
+      font-size: 3.8em;
+      color: #39a0ed;
+      text-shadow: 3px 3px 0px #fff, 6px 6px 0px #203f94;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 1.6em;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+    /* Cards dos planos */
     .plans-container {
       display: flex;
       justify-content: center;
@@ -81,87 +101,162 @@
       padding: 40px 20px;
       flex-wrap: wrap;
     }
-
     .plan-card {
       background: rgba(26, 42, 94, 0.9);
       border-radius: 10px;
       padding: 20px;
-      width: 90%;
       max-width: 300px;
-      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 10px rgba(57, 160, 237, 0.7);
       border: 2px solid #f0f0f0;
       text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .plan-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0px 10px 20px rgba(57, 160, 237, 0.9);
-      border-color: #16b6df;
+      transform: translateY(-10px);
+      box-shadow: 0 6px 15px rgba(57, 160, 237, 1);
     }
-
-    .plan-card h3 {
+    /* Botões personalizados */
+    .subscribe-button {
+      background: linear-gradient(45deg, #39a0ed, #203f94);
+      border: none;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-size: 16px;
-      margin-bottom: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      text-shadow: 1px 1px 0px #000;
+      margin-top: 15px;
     }
-
-    .plan-card p {
-      font-size: 14px;
+    .subscribe-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(57, 160, 237, 0.8);
+      background: linear-gradient(45deg, #203f94, #39a0ed);
+    }
+    .toggle-button {
+      background: linear-gradient(45deg, #39a0ed, #203f94);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      margin-top: 15px;
+    }
+    .toggle-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(57, 160, 237, 0.8);
+      background: linear-gradient(45deg, #203f94, #39a0ed);
+    }
+    /* Seção de bolsas */
+    .scholarship {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 600px;
+      background: rgba(26, 42, 94, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(57, 160, 237, 0.7);
+    }
+    .scholarship h2 {
+      font-size: 2.5em;
+      color: #39a0ed;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 0px #fff;
+    }
+    .scholarship p {
+      font-size: 1.2em;
+      color: #ccc;
       margin-bottom: 15px;
     }
-
-    .plan-card button {
-      font-size: 14px;
-      padding: 10px 20px;
-      background: #119edf;
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .plan-card button:hover {
-      background: #203f94;
-      transform: scale(1.1);
-      box-shadow: 0px 0px 15px rgba(15, 133, 202, 0.8);
-    }
-
-    footer {
+    /* Formulário de pré-cadastro */
+    .form-container {
+      background: rgba(26, 42, 94, 0.9);
       padding: 20px;
-      margin-top: 20px;
-      background: #1a2a5e;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(57, 160, 237, 0.7);
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(-20px);
     }
-
+    .form-container.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .form-container label {
+      display: block;
+      text-align: left;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .form-container input, 
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .form-container button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    /* Footer */
+    footer {
+      background: #111;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+    }
+    /* Responsividade */
     @media (max-width: 768px) {
-      body {
-        padding-top: 140px;
+      .hero h2 {
+        font-size: 2.8em;
       }
-      .plan-card {
-        width: 100%;
-        max-width: 280px;
+      .hero p {
+        font-size: 1.2em;
       }
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-      nav a {
-        font-size: 10px;
-        padding: 6px 12px;
+      nav a, .subscribe-button, .toggle-button {
+        font-size: 14px;
+        padding: 10px 20px;
       }
     }
   </style>
+  <script>
+    function toggleForm() {
+      const form = document.getElementById("scholarship-form");
+      const toggleBtn = document.getElementById("toggle-button");
+      if (form.classList.contains("show")) {
+        form.classList.remove("show");
+        toggleBtn.textContent = "Leia Mais";
+      } else {
+        form.classList.add("show");
+        toggleBtn.textContent = "Leia Menos";
+      }
+    }
+  </script>
 </head>
 <body>
   <header>
     <div class="logo-container">
       <img src="logo.jpg" alt="Logo LevelUp Academy">
     </div>
-    <h1><a href="index.html" style="text-decoration: none; color: white;">LevelUp Academy</a></h1>
+    <h1><a href="index.html" style="text-decoration: none; color: #fff;">LevelUp Academy</a></h1>
     <nav>
-      <a href="planos.html">Planos</a>
-      <a href="atendimento.html">Atendimento</a>
-      <a href="login.html" onclick="logout()">Logout</a>
+      <a href="curso.html">Cursos</a>
+      <a href="Atendimento.html">Atendimento</a>
+      <a href="login.html">Logout</a>
     </nav>
   </header>
 
@@ -175,16 +270,40 @@
       <h3>Plano Básico</h3>
       <p>Acesso aos cursos iniciais.</p>
       <p>R$49,99/mês</p>
-      <button>Assinar</button>
+      <button class="subscribe-button">Assinar</button>
     </div>
-
     <div class="plan-card">
       <h3>Plano Master</h3>
       <p>Acesso ilimitado e coaching.</p>
       <p>R$149,99/mês</p>
-      <button>Assinar</button>
+      <button class="subscribe-button">Assinar</button>
     </div>
   </section>
+
+  <section class="scholarship">
+    <h2>Educação para Todos</h2>
+    <p>A cada 1000 planos assinados, uma pessoa de baixa renda receberá uma bolsa de estudos.</p>
+    <button id="toggle-button" class="toggle-button" onclick="toggleForm()">Leia Mais</button>
+  </section>
+
+  <div id="scholarship-form" class="form-container">
+    <h3>Pré-cadastro para Bolsa</h3>
+    <form>
+      <label>Nome:</label>
+      <input type="text" required>
+      <label>CPF:</label>
+      <input type="text" required>
+      <label>Data de Nascimento:</label>
+      <input type="date" required>
+      <label>Número de Celular:</label>
+      <input type="tel" required>
+      <label>Email:</label>
+      <input type="email" required>
+      <label>Motivação:</label>
+      <textarea required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 
   <footer>
     <p>&copy; 2025 LevelUp Academy - Aprenda jogando!</p>
