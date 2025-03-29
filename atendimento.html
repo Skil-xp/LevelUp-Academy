@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atendimento - LevelUp Academy</title>
-  <link href="styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
@@ -29,22 +28,44 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 20px;
+      padding: 15px;
       background: linear-gradient(-45deg, #001f3f, #0074D9);
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
       z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 3px solid white;
+      margin-right: 10px;
+    }
+
+    header nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     header nav a {
       text-decoration: none;
       color: #fff;
-      padding: 12px 20px;
+      padding: 10px 15px;
       background: #0074D9;
       border-radius: 10px;
       transition: transform 0.3s, background 0.3s;
+      font-size: 12px;
     }
 
     header nav a:hover {
@@ -53,25 +74,26 @@
     }
 
     .chat-container {
-      width: 90%;
-      max-width: 600px;
+      width: 95%;
+      max-width: 500px;
       background: rgba(0, 0, 0, 0.8);
-      padding: 20px;
+      padding: 15px;
       border-radius: 15px;
+      margin-top: 80px;
     }
 
     .chatbox {
       background: #222;
       border-radius: 10px;
-      padding: 20px;
-      height: 400px;
+      padding: 15px;
+      height: 300px;
       overflow-y: auto;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .chat-message {
-      padding: 10px;
-      margin-bottom: 15px;
+      padding: 8px;
+      margin-bottom: 10px;
       border-radius: 10px;
     }
 
@@ -89,27 +111,38 @@
     .button-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
     }
 
     .quick-button {
       background-color: #0074D9;
       color: white;
-      padding: 10px 20px;
-      border-radius: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      background: #001f3f;
+      position: fixed;
+      bottom: 0;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>LevelUp Academy</h1>
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Logo LevelUp Academy">
+      <h1 style="font-size: 16px;"><a href="index.html" style="text-decoration: none; color: white;">LevelUp Academy</a></h1>
+    </div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="planos.html"> Planos</a>
+      <a href="planos.html">Planos</a>
       <a href="curso.html">Cursos</a>
       <a class="navigation" href="login.html" onclick="logout()">Logout</a>
     </nav>
