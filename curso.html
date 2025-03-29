@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -6,20 +6,24 @@
   <title>Cursos - LevelUp Academy</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    /* Reset e configuração básica */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Press Start 2P', cursive;
       background: #0a0f25;
       color: #fff;
-      padding-top: 120px;
       text-align: center;
+      padding-top: 240px; /* espaço para header e hero */
+      overflow-x: hidden;
     }
-
+    /* Header e Navegação */
     header {
       position: fixed;
       top: 0;
@@ -32,10 +36,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
-      z-index: 100;
+      box-shadow: 0 4px 10px rgba(57, 160, 237, 0.7);
+      z-index: 1000;
     }
-
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
     .logo-container {
       width: 100px;
       height: 100px;
@@ -46,94 +53,120 @@
       justify-content: center;
       overflow: hidden;
       border: 4px solid white;
+      margin-bottom: 10px;
     }
-
     .logo-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 12px 24px;
+      background: #39a0ed;
+      border-radius: 10px;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      border: 2px solid #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    nav a:hover {
+      transform: scale(1.1);
+      background: #0b44c0;
+      box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
+    }
+    /* Seção Hero com estilo pixel art */
     .hero {
-      padding: 100px 10px 80px;
+      padding: 20px 10px 40px;
+      max-width: 800px;
+      margin: 0 auto 20px;
     }
-
     .hero h2 {
-      font-size: 28px;
+      font-size: 3.8em;
+      color: #39a0ed;
+      text-shadow: 3px 3px 0px #fff, 6px 6px 0px #203f94;
+      margin-bottom: 15px;
     }
-
+    .hero p {
+      font-size: 1.6em;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+    /* Container de cursos */
     .courses-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
       padding: 20px;
-      max-width: 100%;
+      max-width: 1200px;
       margin: auto;
     }
-
     .course-card {
-      padding: 15px;
       background: rgba(26, 42, 94, 0.9);
+      padding: 15px;
       border-radius: 15px;
-      box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+      box-shadow: 0 4px 10px rgba(57, 160, 237, 0.7);
       transition: transform 0.3s, box-shadow 0.3s;
       border: 2px solid #f0f0f0;
+      text-align: center;
     }
-
     .course-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0px 10px 20px rgba(57, 160, 237, 0.9);
+      box-shadow: 0 10px 20px rgba(57, 160, 237, 0.9);
       border-color: #16b6df;
     }
-
     .course-card h3 {
-      font-size: 14px;
+      font-size: 1.2em;
+      margin-bottom: 10px;
     }
-
     .course-card p {
-      font-size: 12px;
+      font-size: 0.9em;
+      margin-bottom: 15px;
     }
-
+    /* Botão customizado para inscrição */
     .course-card button {
-      font-size: 12px;
+      font-size: 0.9em;
       padding: 8px 15px;
-      background: #119edf;
+      background: linear-gradient(45deg, #39a0ed, #203f94);
       border: none;
       color: white;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      text-shadow: 1px 1px 0px #000;
     }
-
     .course-card button:hover {
-      background: #203f94;
+      background: linear-gradient(45deg, #203f94, #39a0ed);
       transform: scale(1.1);
-      box-shadow: 0px 0px 15px rgba(15, 133, 202, 0.8);
+      box-shadow: 0 0 15px rgba(15, 133, 202, 0.8);
     }
-
-    .nav-button {
-      font-size: 12px;
-      padding: 8px 15px;
-      background: #39a0ed;
-      border: none;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-      border: 2px solid white;
-    }
-
-    .nav-button:hover {
-      background: #0b44c0;
-      transform: scale(1.1);
-      box-shadow: 0px 0px 15px rgba(0, 195, 255, 0.8);
-    }
-
+    /* Footer */
     footer {
       padding: 10px;
+      background: #111;
+      text-align: center;
+      font-size: 14px;
+    }
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2.8em;
+      }
+      .hero p {
+        font-size: 1.2em;
+      }
+      nav a {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
@@ -142,11 +175,11 @@
     <div class="logo-container">
       <img src="logo.jpg" alt="Logo LevelUp Academy">
     </div>
-    <h1><a href="index.html" style="text-decoration: none; color: white; font-size: 16px;">LevelUp Academy</a></h1>
+    <h1><a href="index.html" style="text-decoration: none; color: #fff; font-size: 16px;">LevelUp Academy</a></h1>
     <nav>
-      <a href="planos.html" class="nav-button">Planos</a>
-      <a href="atendimento.html" class="nav-button">Atendimento</a>
-      <a href="login.html" onclick="logout()" class="nav-button">Logout</a>
+      <a href="planos.html">Planos</a>
+      <a href="Atendimento.html">Atendimento</a>
+      <a href="login.html" onclick="logout()">Logout</a>
     </nav>
   </header>
 
@@ -161,19 +194,16 @@
       <p>Aprimore sua leitura e escrita de forma divertida.</p>
       <button>Inscrever</button>
     </div>
-
     <div class="course-card">
       <h3>Matemática Divertida</h3>
       <p>Aprenda matemática com desafios e jogos interativos.</p>
       <a href="https://view.genially.com/67e1ef1b4ad4b11f40842fb2/interactive-content-pixelmath"><button>Inscrever</button></a>
     </div>
-
     <div class="course-card">
       <h3>Ciências Exploratórias</h3>
       <p>Descubra o mundo da ciência com experimentos e aventuras.</p>
       <button>Inscrever</button>
     </div>
-
     <div class="course-card">
       <h3>História e Geografia</h3>
       <p>Conheça o Brasil e o mundo através de missões e mapas.</p>
