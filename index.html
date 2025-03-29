@@ -16,14 +16,14 @@
             color: white;
             font-family: 'Press Start 2P', cursive;
             text-align: center;
-            padding-top: 80px;
+            padding-top: 100px;
         }
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px;
+            padding: 10px;
             background: linear-gradient(-45deg, #0a1f44, #1a2a5e, #39a0ed, #1a2a5e);
             background-size: 300% 300%;
             animation: gradientAnimation 5s infinite alternate;
@@ -33,21 +33,27 @@
             box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
             z-index: 100;
             border-bottom: 4px solid #39a0ed;
+            padding-left: 20px;
+            padding-right: 20px;
         }
         @keyframes gradientAnimation {
             0% { background-position: left; }
             100% { background-position: right; }
         }
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
         nav a {
             text-decoration: none;
             color: #fff;
-            padding: 10px 20px;
+            padding: 6px 12px;
             background: #39a0ed;
             border-radius: 10px;
             transition: transform 0.3s, background 0.3s;
             border: 2px solid #fff;
-            margin: 0 5px;
-            font-size: 14px;
+            font-size: 10px;
         }
         nav a:hover {
             transform: scale(1.1);
@@ -61,25 +67,41 @@
             justify-content: center;
             height: 100vh;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5); /* Adicionando fundo semitransparente */
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7); /* Sombra para destacar */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
             max-width: 800px;
             margin: 0 auto;
         }
         .logo {
-            width: 120px;
-            height: 120px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/3/3a/Pixel_art_logo.png');
-            background-size: cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                #39a0ed,
+                #39a0ed 10px,
+                #1a2a5e 10px,
+                #1a2a5e 20px
+            );
             border-radius: 10px;
-            margin-bottom: 20px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
         }
-        h1 {
-            color: #ffffff;
-            font-size: 28px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 8px rgba(89, 165, 255, 0.8);
+        .logo img {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(4px 4px 0px #1a2a5e) drop-shadow(-4px -4px 0px #39a0ed);
+        }
+        .highlight-box {
+            background: #1a2a5e;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
         }
         p {
             color: #b3cde0;
@@ -87,7 +109,7 @@
             max-width: 600px;
             line-height: 1.6;
             text-shadow: 1px 1px 6px rgba(255, 255, 255, 0.2);
-            margin-bottom: 15px; /* Espaçamento entre os parágrafos */
+            margin-bottom: 15px;
         }
         .button {
             background: #00a2ff;
@@ -100,6 +122,13 @@
             cursor: pointer;
             transition: transform 0.3s;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        footer {
+            background: #1a2a5e;
+            padding: 10px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -114,12 +143,18 @@
         </nav>
     </header>
     <div class="container">
-        <div class="logo"></div>
-        <h1>LevelUp Academy</h1>
-        <p>O <strong>LevelUp Academy</strong> é um projeto inovador que transforma a educação em uma experiência imersiva e gamificada.
-        Aqui, adolescentes entram em um mundo de aprendizado que funciona como um jogo, onde cada curso é uma nova fase a ser conquistada.</p>
-        <p>Os alunos exploram diversas matérias, desbloqueiam desafios, ganham recompensas e evoluem seus conhecimentos de forma divertida e interativa.
-        O objetivo é tornar o aprendizado mais envolvente, estimulando a curiosidade e a motivação para o crescimento pessoal e acadêmico.</p>
+        <div class="logo">
+            <img src="Logo&slogan.png" alt="Logo do site">
+        </div>
+        <div class="highlight-box">
+            <p>O <strong>LevelUp Academy</strong> é um projeto inovador que transforma a educação em uma experiência imersiva e gamificada.
+            Aqui, adolescentes entram em um mundo de aprendizado que funciona como um jogo, onde cada curso é uma nova fase a ser conquistada.</p>
+            <p>Os alunos exploram diversas matérias, desbloqueiam desafios, ganham recompensas e evoluem seus conhecimentos de forma divertida e interativa.
+            O objetivo é tornar o aprendizado mais envolvente, estimulando a curiosidade e a motivação para o crescimento pessoal e acadêmico.</p>
+        </div>
     </div>
+    <footer>
+        &copy; 2025 LevelUp Academy - Todos os direitos reservados.
+    </footer>
 </body>
 </html>
