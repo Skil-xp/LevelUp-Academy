@@ -6,12 +6,15 @@
   <title>Atendimento - LevelUp Academy</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    /* Reset e configurações básicas */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Press Start 2P', cursive;
       background: linear-gradient(135deg, #001f3f, #0074D9);
@@ -20,9 +23,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      padding-top: 120px;
+      overflow-x: hidden;
     }
-
+    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -30,19 +34,23 @@
       width: 100%;
       padding: 15px;
       background: linear-gradient(-45deg, #001f3f, #0074D9);
+      background-size: 300% 300%;
+      animation: headerGradient 5s infinite alternate;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
-      z-index: 100;
       flex-wrap: wrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      z-index: 100;
     }
-
+    @keyframes headerGradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
     .logo-container {
       display: flex;
       align-items: center;
     }
-
     .logo-container img {
       width: 50px;
       height: 50px;
@@ -50,38 +58,45 @@
       border: 3px solid white;
       margin-right: 10px;
     }
-
-    header nav {
+    header h1 {
+      font-size: 16px;
+    }
+    header h1 a {
+      text-decoration: none;
+      color: white;
+    }
+    nav {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
     }
-
-    header nav a {
+    nav a {
       text-decoration: none;
       color: #fff;
       padding: 10px 15px;
-      background: #0074D9;
+      background: linear-gradient(45deg, #0074D9, #00aaff);
       border-radius: 10px;
-      transition: transform 0.3s, background 0.3s;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
       font-size: 12px;
+      border: 2px solid white;
+      cursor: pointer;
     }
-
-    header nav a:hover {
+    nav a:hover {
       transform: scale(1.1);
-      background: #00aaff;
+      background: linear-gradient(45deg, #00aaff, #0074D9);
+      box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
     }
-
+    /* Chat Container */
     .chat-container {
       width: 95%;
       max-width: 500px;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 15px;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px;
       border-radius: 15px;
-      margin-top: 80px;
+      margin-top: 90px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     }
-
     .chatbox {
       background: #222;
       border-radius: 10px;
@@ -90,41 +105,48 @@
       overflow-y: auto;
       margin-bottom: 15px;
     }
-
     .chat-message {
       padding: 8px;
       margin-bottom: 10px;
       border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.3;
     }
-
     .chatbot-message {
       background-color: #0074D9;
-      color: white;
+      color: #fff;
+      text-align: left;
     }
-
     .user-message {
       background-color: #444;
-      color: white;
+      color: #fff;
       align-self: flex-end;
+      text-align: right;
     }
-
+    /* Botões de atalho */
     .button-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       justify-content: center;
     }
-
     .quick-button {
-      background-color: #0074D9;
+      background: linear-gradient(45deg, #0074D9, #00aaff);
       color: white;
       padding: 8px 12px;
       border-radius: 8px;
       border: none;
       cursor: pointer;
       font-size: 12px;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      text-shadow: 1px 1px 0px #000;
     }
-
+    .quick-button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, #00aaff, #0074D9);
+      box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
+    }
+    /* Footer */
     footer {
       text-align: center;
       padding: 10px;
@@ -132,6 +154,7 @@
       background: #001f3f;
       position: fixed;
       bottom: 0;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -139,12 +162,12 @@
   <header>
     <div class="logo-container">
       <img src="logo.jpg" alt="Logo LevelUp Academy">
-      <h1 style="font-size: 16px;"><a href="index.html" style="text-decoration: none; color: white;">LevelUp Academy</a></h1>
+      <h1><a href="index.html">LevelUp Academy</a></h1>
     </div>
     <nav>
       <a href="planos.html">Planos</a>
       <a href="curso.html">Cursos</a>
-      <a class="navigation" href="login.html" onclick="logout()">Logout</a>
+      <a href="login.html" onclick="logout()">Logout</a>
     </nav>
   </header>
 
@@ -170,7 +193,7 @@
   <script>
     function sendQuickMessage(message) {
       const chatbox = document.getElementById("chatbox");
-      const userMessage = `<div class='chat-message user-message'>${message}</div>`;
+      const userMessage = `<div class="chat-message user-message">${message}</div>`;
       chatbox.innerHTML += userMessage;
       chatbox.scrollTop = chatbox.scrollHeight;
       
@@ -190,9 +213,10 @@
             botResponse = "Se precisar de suporte técnico, entre em contato pelo nosso e-mail ou WhatsApp.";
             break;
           default:
-            botResponse = "Desculpe, não entendi. Você pode reformular sua pergunta?";
+            botResponse = "Desculpe, não entendi. Pode reformular sua pergunta?";
         }
-        chatbox.innerHTML += `<div class='chat-message chatbot-message'>${botResponse}</div>`;
+        const botMessage = `<div class="chat-message chatbot-message">${botResponse}</div>`;
+        chatbox.innerHTML += botMessage;
         chatbox.scrollTop = chatbox.scrollHeight;
       }, 1000);
     }
