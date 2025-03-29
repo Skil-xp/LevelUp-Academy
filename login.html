@@ -1,405 +1,160 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LevelUp Academy - Entrar / Criar Conta</title>
-  <!-- Fontes: Montserrat para o corpo e Press Start 2P para títulos e botões (estilo videogame) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #001f3f, #0074D9, #001f3f);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      color: #fff;
-    }
-    
-    /* Fundo com formato de TV de tubo */
-    .tv-background {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 120%;
-      height: 120%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(ellipse at center, rgba(20,20,60,0.8) 0%, rgba(0,0,40,0.95) 100%);
-      clip-path: ellipse(70% 80% at 50% 50%);
-      z-index: 0;
-    }
-    
-    /* Canvas de fundo para efeitos dinâmicos */
-    #backgroundCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      z-index: 1;
-    }
-    
-    /* Efeito de scanlines e flicker (TV antiga) */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.15) 2px,
-        rgba(0, 0, 0, 0.15) 4px
-      );
-      pointer-events: none;
-      z-index: 3;
-      opacity: 0.8;
-      animation: tvFlicker 0.1s infinite;
-    }
-    
-    @keyframes tvFlicker {
-      0% { opacity: 0.8; }
-      50% { opacity: 1; }
-      100% { opacity: 0.8; }
-    }
-    
-    /* Efeito de ruído (glitch leve) */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M+AAwAD+AK7Sck1AAAAAElFTkSuQmCC');
-      opacity: 0.05;
-      pointer-events: none;
-      z-index: 2;
-      animation: noise 0.2s steps(2) infinite;
-    }
-    
-    @keyframes noise {
-      0% { transform: translate(0, 0); }
-      10% { transform: translate(-5%, -5%); }
-      20% { transform: translate(-10%, 5%); }
-      30% { transform: translate(5%, -10%); }
-      40% { transform: translate(0, 5%); }
-      50% { transform: translate(-5%, 0); }
-      60% { transform: translate(5%, 5%); }
-      70% { transform: translate(10%, -5%); }
-      80% { transform: translate(-10%, 0); }
-      90% { transform: translate(5%, 10%); }
-      100% { transform: translate(0, 0); }
-    }
-    
-    /* Moldura da TV com estilo retrô */
-    .tv-frame {
-      background: #222;
-      padding: 20px;
-      border: 8px solid #444;
-      border-radius: 50px 50px 20px 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      position: relative;
-      z-index: 5;
-    }
-    
-    /* Container interno dos formulários com estética de videogame */
-    .form-container {
-      background: rgba(30, 30, 30, 0.9);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      border: 3px solid #00ffea;
-      animation: glitch 2s infinite;
-    }
-    
-    @keyframes glitch {
-      0% { border-color: #00ffea; }
-      25% { border-color: #ff00ff; }
-      50% { border-color: #ffff00; }
-      75% { border-color: #ff00ff; }
-      100% { border-color: #00ffea; }
-    }
-    
-    .logo img {
-      width: 80px;
-      margin-bottom: 20px;
-    }
-    
-    h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 20px;
-      margin-bottom: 25px;
-      text-shadow: 2px 2px 0 #000;
-    }
-    
-    .input-group {
-      text-align: left;
-      margin-bottom: 20px;
-    }
-    
-    .input-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #cccccc;
-    }
-    
-    .input-group input {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      background: #2b2b2b;
-      color: #fff;
-      font-size: 14px;
-      transition: background 0.3s;
-    }
-    
-    .input-group input:focus {
-      outline: none;
-      background: #3a3a3a;
-    }
-    
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #007bff;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
-      font-family: 'Press Start 2P', cursive;
-      text-shadow: 1px 1px 0 #000;
-    }
-    
-    button:hover {
-      background: #0056b3;
-      transform: scale(1.05);
-    }
-    
-    .links {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
-    
-    .links a {
-      color: #007bff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-      cursor: pointer;
-    }
-    
-    .links a:hover {
-      color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LevelUp Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0a1f44;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            padding-top: 100px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(-45deg, #0a1f44, #1a2a5e, #39a0ed, #1a2a5e);
+            background-size: 300% 300%;
+            animation: gradientAnimation 5s infinite alternate;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(57, 160, 237, 0.7);
+            z-index: 100;
+            border-bottom: 4px solid #39a0ed;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: left; }
+            100% { background-position: right; }
+        }
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 6px 12px;
+            background: #39a0ed;
+            border-radius: 10px;
+            transition: transform 0.3s, background 0.3s;
+            border: 2px solid #fff;
+            font-size: 10px;
+        }
+        nav a:hover {
+            transform: scale(1.1);
+            background: #0b44c0;
+            box-shadow: 0px 0px 15px rgba(0, 195, 255, 0.8);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .logo {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                #39a0ed,
+                #39a0ed 10px,
+                #1a2a5e 10px,
+                #1a2a5e 20px
+            );
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+        .logo img {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(4px 4px 0px #1a2a5e) drop-shadow(-4px -4px 0px #39a0ed);
+        }
+        .highlight-box {
+            background: #1a2a5e;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+        }
+        p {
+            color: #b3cde0;
+            font-size: 16px;
+            max-width: 600px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 6px rgba(255, 255, 255, 0.2);
+            margin-bottom: 15px;
+        }
+        .button {
+            background: #00a2ff;
+            border: none;
+            padding: 15px 30px;
+            color: #0a1f44;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        footer {
+            background: #1a2a5e;
+            padding: 10px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
-  <!-- Fundo com formato de TV -->
-  <div class="tv-background"></div>
-  
-  <!-- Canvas de fundo para efeitos dinâmicos (letras, etc.) -->
-  <canvas id="backgroundCanvas" width="1419" height="919"></canvas>
-  
-  <div class="tv-frame">
-    <!-- Container de Login -->
-    <div id="login-container" class="form-container">
-      <div class="logo">
-        <img src="LevelUp Academy.png" alt="LevelUp Academy">
-      </div>
-      <h1>Bem-vindo à LevelUp Academy!</h1>
-      <form id="login-form">
-        <div class="input-group">
-          <label for="login-email">E-mail</label>
-          <input type="email" id="login-email" name="email" placeholder="Digite seu e-mail" required>
+    <header>
+        <h1>LevelUp Academy</h1>
+        <nav>
+            <a href="curso.html">Cursos</a>
+            <a href="planos.html">Planos</a>
+            <a href="atendimento.html">Atendimento</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="logo">
+            <img src="Logo&slogan.png" alt="Logo do site">
         </div>
-        <div class="input-group">
-          <label for="login-password">Senha</label>
-          <input type="password" id="login-password" name="password" placeholder="Digite sua senha" required>
+        <div class="highlight-box">
+            <p>O <strong>LevelUp Academy</strong> é um projeto inovador que transforma a educação em uma experiência imersiva e gamificada.
+            Aqui, adolescentes entram em um mundo de aprendizado que funciona como um jogo, onde cada curso é uma nova fase a ser conquistada.</p>
+            <p>Os alunos exploram diversas matérias, desbloqueiam desafios, ganham recompensas e evoluem seus conhecimentos de forma divertida e interativa.
+            O objetivo é tornar o aprendizado mais envolvente, estimulando a curiosidade e a motivação para o crescimento pessoal e acadêmico.</p>
         </div>
-        <button type="submit">Entrar</button>
-      </form>
-      <div class="links">
-        <a id="link-esqueceu" onclick="alert('Recuperação de senha não implementada!')">Esqueceu sua senha?</a>
-        <a id="link-criar" onclick="toggleForms()">Criar conta</a>
-      </div>
     </div>
-    
-    <!-- Container de Cadastro (inicialmente oculto) -->
-    <div id="register-container" class="form-container" style="display: none;">
-      <div class="logo">
-        <img src="LevelUp Academy.png" alt="LevelUp Academy">
-      </div>
-      <h1>Criar Conta</h1>
-      <form id="register-form">
-        <div class="input-group">
-          <label for="register-email">E-mail</label>
-          <input type="email" id="register-email" name="email" placeholder="Digite seu e-mail" required>
-        </div>
-        <div class="input-group">
-          <label for="register-username">Nome de Usuário <small>(até 10 caracteres)</small></label>
-          <input type="text" id="register-username" name="username" placeholder="Digite seu nome" maxlength="10" required>
-        </div>
-        <div class="input-group">
-          <label for="register-password">Senha</label>
-          <input type="password" id="register-password" name="password" placeholder="Digite sua senha" required>
-        </div>
-        <div class="input-group">
-          <label for="register-password2">Confirme a senha</label>
-          <input type="password" id="register-password2" name="password2" placeholder="Confirme sua senha" required>
-        </div>
-        <button type="submit">Criar Conta</button>
-      </form>
-      <div class="links">
-        <a onclick="toggleForms()">Voltar para Login</a>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    const canvas = document.getElementById('backgroundCanvas');
-    const ctx = canvas.getContext('2d');
-    const width = canvas.width;
-    const height = canvas.height;
-    
-    let letters = [];
-    
-    function randomLetter() {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      return chars[Math.floor(Math.random() * chars.length)];
-    }
-    
-    function randomLightColor() {
-      const r = 200 + Math.floor(Math.random() * 56);
-      const g = 200 + Math.floor(Math.random() * 56);
-      const b = 200 + Math.floor(Math.random() * 56);
-      return `rgb(${r}, ${g}, ${b})`;
-    }
-    
-    function spawnLetter() {
-      const letter = {
-        char: randomLetter(),
-        x: Math.random() * width,
-        y: Math.random() * height,
-        alpha: 0,
-        fadeIn: true,
-        fadeSpeed: 0.08,
-        color: randomLightColor()
-      };
-      letters.push(letter);
-    }
-    
-    function draw() {
-      ctx.clearRect(0, 0, width, height);
-      if (Math.random() < 0.1) spawnLetter();
-      for (let i = letters.length - 1; i >= 0; i--) {
-        const letter = letters[i];
-        if (letter.fadeIn) {
-          letter.alpha += letter.fadeSpeed;
-          if (letter.alpha >= 1) {
-            letter.alpha = 1;
-            letter.fadeIn = false;
-          }
-        } else {
-          letter.alpha -= letter.fadeSpeed;
-          if (letter.alpha <= 0) {
-            letters.splice(i, 1);
-            continue;
-          }
-        }
-        ctx.globalAlpha = letter.alpha;
-        ctx.font = "20px Montserrat, sans-serif";
-        ctx.fillStyle = letter.color;
-        ctx.fillText(letter.char, letter.x, letter.y);
-      }
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(draw);
-    }
-    
-    draw();
-    
-    // Alterna entre os formulários de login e cadastro
-    function toggleForms() {
-      const loginContainer = document.getElementById('login-container');
-      const registerContainer = document.getElementById('register-container');
-      if (loginContainer.style.display === 'none') {
-        loginContainer.style.display = 'block';
-        registerContainer.style.display = 'none';
-      } else {
-        loginContainer.style.display = 'none';
-        registerContainer.style.display = 'block';
-      }
-    }
-    
-    // Cadastro de usuário utilizando localStorage
-    document.getElementById('register-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('register-email').value;
-      const username = document.getElementById('register-username').value;
-      const password = document.getElementById('register-password').value;
-      const password2 = document.getElementById('register-password2').value;
-      
-      if(password !== password2) {
-        alert("As senhas não conferem!");
-        return;
-      }
-      
-      if(username.length > 10) {
-        alert("O nome de usuário deve ter no máximo 10 caracteres!");
-        return;
-      }
-      
-      let users = JSON.parse(localStorage.getItem('users')) || [];
-      if(users.find(user => user.email === email)) {
-        alert("Usuário já cadastrado!");
-        return;
-      }
-      
-      users.push({ email, username, password });
-      localStorage.setItem('users', JSON.stringify(users));
-      alert("Conta criada com sucesso! Faça login.");
-      toggleForms();
-    });
-    
-    // Login de usuário – redireciona para index.html se as credenciais estiverem corretas
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      
-      let users = JSON.parse(localStorage.getItem('users')) || [];
-      const user = users.find(user => user.email === email && user.password === password);
-      
-      if(user) {
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
-        window.location.href = 'index.html';
-      } else {
-        alert("Credenciais incorretas!");
-      }
-    });
-  </script>
+    <footer>
+        &copy; 2025 LevelUp Academy - Todos os direitos reservados.
+    </footer>
 </body>
 </html>
